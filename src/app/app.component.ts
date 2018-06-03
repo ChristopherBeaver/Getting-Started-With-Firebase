@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { AngularFirestore } from 'angularfire2/firestore';
+import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  teams$: Observable<any[]>;
+  constructor(afs: AngularFirestore) {
+    this.teams$ = afs.collection('teams').valueChanges();
+  }
+}
+
+export class Team {
+  Name: string;
+  Information: string;
 }
